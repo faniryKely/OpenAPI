@@ -2,4 +2,4 @@
 
 here is the link that leads to our swagger openApi onboring API 
 
-https://petstore.swagger.io/?url=https://raw.githubusercontent.com/faniryKely/OpenAPI/master/fichier%20yaml/openApi.yaml?token=GHSAT0AAAAAACGLXWK5UEMHIKLQYUFM5BSGZG7MOTQ#/
+https://raw.githubusercontent.com/faniryKely/OpenAPI/master/fichier%20yaml/openApi.yaml?token=GHSAT0AAAAAACGLXWK4YVCRU2TJQDLAD2WEZG7QHSA
