@@ -55,11 +55,18 @@ paths:
                   birthdate:
                     type: string
               example:
-                {
+                [
+                  {
                   "id": 1,
                   "name": "faniry",
                   "birthdate": "2002-05-25"
+                },
+                {
+                  "id": 2,
+                  "name": "Riantsoa",
+                  "birthdate": "2001-04-15"
                 }
+                ]
         '400':
           description: Invalid ID
         '404':
@@ -137,15 +144,168 @@ paths:
           description: Invalid ID
         '404':
           description: Student not found
+          
+  /teacher/{TeacherId}:
+    get:
+      tags:
+        - Teacher
+      summary: Get Teacher by ID
+      description: Multiple status values can be provided with comma-separated strings
+      operationId: getTeacherById
+      parameters:
+        - name: TeacherId
+          in: path
+          description: ID of the teacher to get
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  birthdate:
+                    type: string
+              example:
+                [  
+                  {
+                  "id": 1,
+                  "name": "Toky Mahery",
+                  "first_name": "RAMAROZAKA",
+                  "course": "Prog",
+                  "module": "Algorithm",
+                  "duration": "2h"
+                },
+                 {
+                  "id": 2,
+                  "name": "Ryan",
+                  "first_name": "ANDRIAMAHERY",
+                  "course": "API",
+                  "module": "Web Service",
+                  "duration": "2h"
+                },
+                  {
+                  "id": 3,
+                  "name": "Harry",
+                  "first_name": "RAKOTONDRATOMPO",
+                  "course": "SYS1",
+                  "module": "Server APACHE",
+                  "duration": "2h"
+                }
+                ]
+        '400':
+          description: Invalid ID
+        '404':
+          description: Teacher not found
+    post:
+      tags:
+        - Teacher
+      summary: Create a new Teacher
+      parameters:
+        - name: TeacherId
+          in: path
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+      responses:
+        '201':
+          description: Teacher created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+        '400':
+          description: Invalid request
+        '409':
+          description: Teacher already exists
+    put:
+      tags:
+        - Teacher
+      summary: Update a Teacher
+      description: Update information of an existing Teacher.
+      parameters:
+        - name: TeacherId
+          in: path
+          description: ID of the Teacher to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Update Teacher
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+      responses:
+        '200':
+          description: Success - Teacher updated
+        '400':
+          description: Incorrect request
+        '404':
+          description: Teacher not found
+    delete:
+      tags:
+        - Teacher
+      summary: Delete Teacher by ID
+      description: Delete Teacher by ID
+      operationId: deleteTeacherById
+      parameters:
+        - name: TeacherId
+          in: path
+          description: ID of the Teacher to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Teacher deleted successfully
+        '400':
+          description: Invalid ID
+        '404':
+          description: Teacher not found
+
 components:
   schemas:
     Student:
-      type: object
-      properties:
-        id:
-          type: integer
-         
-        name:
-          type: string
-        birthdate:
-          type: string
+      type: array  # Change type to array
+      items:        # Define the items within the array
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          birthdate:
+            type: string
+
+    Teacher:
+      type: array  # Change type to array
+      items:        # Define the items within the array
+        type: object
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
+          first_name:
+            type: string
+          course:
+            type: string
+          module:
+            type: string
+          duration:
+            type: string
